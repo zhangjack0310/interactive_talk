@@ -2,6 +2,70 @@
 <html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="static/semantic/dist/semantic.min.css">
+<script src="static/semantic/dist/semantic.min.js"></script>
+
+
+</head>
+<body>
+
+<table class="ui celled padded table">
+  <thead>
+    <tr><th class="single line">序号</th>
+    {% for i in coloums%}
+    <th class="fields">{{i}}</th>
+    {%end for%}
+  </tr></thead>
+  <tbody>
+    <!--<tr>-->
+      <!--<td>-->
+        <!--<h2 class="ui center aligned header">1</h2>-->
+      <!--</td>-->
+      <!--<td class="single line">电源输出 </td>-->
+      <!--<td>-->
+        <!--<div class="ui star rating" data-rating="3" data-max-rating="3"></div>-->
+      <!--</td>-->
+      <!--<td class="right aligned">80% <br> <a href="#">18 studies</a> </td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+      <!--<td>-->
+        <!--<h2 class="ui center aligned header">2</h2>-->
+      <!--</td>-->
+      <!--<td class="single line">重量 </td>-->
+      <!--<td>-->
+        <!--<div class="ui star rating" data-rating="3" data-max-rating="3"></div>-->
+      <!--</td>-->
+      <!--<td class="right aligned">100% <br> <a href="#">65项研究</a> </td>-->
+    <!--</tr>-->
+    <tr>
+      <td></td>
+  {% for i in coloums%}
+    <td>
+      <div class="ui input">
+      <input type="text" placeholder={{i}}>
+    </div>
+
+    </td>
+    {%end for%}
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br>
+<button id='send_data'>发送</button>
+
+</body>
+</html>
+
+
+
+
 <script>
 $(document).ready(function(){
   $("#send_data").click(function(){
@@ -15,18 +79,26 @@ $(document).ready(function(){
     });
   });
 });
-</script>
-</head>
-<body>
-<table border="2">
-<tr>
-    {% for i in coloums%}
-    <td>{{i}}</td>
-    {%end for%}
-</tr>
-</table>
-<br>
-<button id='send_data'>发送</button>
 
-</body>
-</html>
+
+$(function () {
+    getData(); // 第一次加载数据
+    // 开启定时任务，时间间隔为3000 ms。
+    setInterval(function () {
+        getData();
+    }, 30000);
+});
+
+
+function getData() {
+    $.getJSON("/send_data", function(data) {
+        if (200 == data.code) {
+            $("#systolic").text(data.data.systolic);
+            $("#diastolic").text(data.data.diastolic);
+            $("#pulse").text(data.data.pulse);
+        }
+    });
+};
+
+
+</script>

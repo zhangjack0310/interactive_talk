@@ -1,9 +1,11 @@
+#coding:utf-8
 import tornado.ioloop
 import tornado.web
 from tornado.web import RequestHandler
-
+import time
 from tornado.options import define, options, parse_command_line
-settings = {'debug':True}
+settings = {'debug':True,
+            "static_path": "static",}
 define("debug", default=True, help="run in debug mode")
 
 
@@ -16,11 +18,12 @@ class MainHandler(RequestHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def get(self):
-        self.render('./ajjax.html',coloums=['first name', 'last_name', 'gender'])
+        coloums = ['物品', '数量', '经办人']
+        self.render('./ajjax.html',coloums=coloums)
 
 class SendHandler(RequestHandler):
     def get(self):
-        self.finish('laobzhang')
+        self.finish(str(time.time()))
 
 
 application = tornado.web.Application([
