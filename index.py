@@ -3,6 +3,9 @@ import tornado.ioloop
 import tornado.web
 from tornado.web import RequestHandler
 import time
+import json
+from datetime import datetime
+from models import get_data
 from tornado.options import define, options, parse_command_line
 settings = {'debug':True,
             "static_path": "static",}
@@ -18,12 +21,24 @@ class MainHandler(RequestHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def get(self):
-        coloums = ['物品', '数量', '经办人']
-        self.render('./ajjax.html',coloums=coloums)
+        data = get_data()
+        head = data.get('key')
+        self.render('./ajjax.html', head=head)
 
 class SendHandler(RequestHandler):
     def get(self):
-        self.finish(str(time.time()))
+        data = get_data()
+
+        head = data.get('key')
+        res = data.get('info')
+        html = "<tbody id='test'>"
+        # print "</td><td>".join(head)
+        for i in res:
+            t = [i[k] for k in head]
+            html += "<tr id='jq'><td></td><td>".format() + "</td><td>".join(t) + '</td></tr>'
+        # print html
+        html += '</tbody>'
+        self.finish(html)
 
 
 application = tornado.web.Application([
