@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>-->
-<!--<link rel="stylesheet" type="text/css" href="static/semantic/dist/semantic.min.css">-->
-<!--<script src="static/semantic/dist/semantic.min.js"></script>-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>/-->
+<script
+        src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" type="text/css" href="static/semantic/dist/semantic.min.css">
+<script src="static/semantic/dist/semantic.min.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +13,7 @@
 <div class="ui form">
     <div class="fields">
         <div class="field">
-            <label>Username</label>
+            <label id='laob'>Username</label>
             <input type="text" placeholder="Username" value="123">
         </div>
         <div class="field">
@@ -20,13 +22,15 @@
         </div>
     </div>
     <div class="equal width fields">
-        <div class="field">
-            <label>First name</label>
-            <input type="text" placeholder="First Name" value="123">
+        <div class="inline fields">
+            <p class="v-label">账号</p>
+            <div class="field">
+                <input type="text" maxlength="11" placeholder="请输入手机号, 暂时只支持中国大陆">
+            </div>
         </div>
         <div class="field">
             <label>Middle name</label>
-            <input type="text" placeholder="Middle Name" value="123">
+            <input type="text" placeholder="Middle Name"  name="phone" value="123">
         </div>
         <div class="field">
             <label>Last name</label>
@@ -34,19 +38,17 @@
         </div>
     </div>
 </div>
-<button id='tijiao' class="ui purple button" data-value="'laoli">Submit</button>
+<button id='tijiao' class="ui purple button" data-value="laoli">Submit</button>
 </body>
 </html>
 
 
 <script>
 
-
-    $("#tijiao").click(function () {
-        var i = $('#tijiao').data('value');
-        console.log(i);
-        var j = $('.field').data();
-        console.log(j);
+    var tj = $("#tijiao")
+    tj.click(function () {
+        var phone_num = $('input[name="phone"]').val();
+        console.log(phone_num)
 
     });
 

@@ -42,14 +42,17 @@ class SendHandler(RequestHandler):
 
 
 class SubmitHandler(RequestHandler):
-    def get(self):
-        pass
+    def post(self):
+        a = self.request.body
+        print a
+        self.finish()
 
 
 
 application = tornado.web.Application([
     (r"/", MainHandler),
 (r"/send_data", SendHandler),
+(r"/submit_data", SubmitHandler),
 
 ], **settings)
 
