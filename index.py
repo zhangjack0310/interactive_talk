@@ -41,6 +41,12 @@ class SendHandler(RequestHandler):
         self.finish(html)
 
 
+class SubmitHandler(RequestHandler):
+    def get(self):
+        pass
+
+
+
 application = tornado.web.Application([
     (r"/", MainHandler),
 (r"/send_data", SendHandler),

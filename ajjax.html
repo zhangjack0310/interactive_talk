@@ -40,7 +40,7 @@
         {% for i in head%}
         <td>
             <div class="ui input">
-                <input type="text" placeholder={{i}}>
+                <input type="text" placeholder={{i}} value="">
             </div>
 
         </td>
@@ -48,29 +48,23 @@
     </tr>
     </tbody>
 </table>
-<table class="ui celled padded table">
-    <tbody id='data_input'>
 
 
-    <!--输入-->
-
-    <tr>
-        <td></td>
+<!--提交-->
+<div id='info_submit' class="ui mini form" data-value="laobzhang">
+    <div class="fields" data-value="laobzhang">
         {% for i in head%}
-        <td>
-            <div class="ui input">
-                <input type="text" placeholder={{i}}>
-            </div>
-
-        </td>
+        <div class="field" >
+            <label>{{i}}</label>
+            <input id='test1' placeholder={{i}} type="text" data-value={{i}}>
+        </div>
         {%end for%}
-    </tr>
-    </tbody>
-</table>
-
+    </div>
+    <div id='tijiao' class="ui purple button" data-value="'laoli">Submit</div>
+</div>
 
 <br>
-<button id='ui button send_data'>发送</button>
+<button id='send_data' class="ui submit button">刷新按钮</button>
 
 </body>
 </html>
@@ -79,11 +73,13 @@
 <script>
 
     $(function () {
+
+
         req_info(); // 第一次加载数据
         // 开启定时任务，时间间隔为3000 ms。
         setInterval(function () {
             req_info();
-        }, 3000);
+        }, 30000);
     });
 
     function req_info() {
@@ -93,7 +89,7 @@
                 city: "Duckburg"
             },
             function (data) {
-                console.log(data)
+//                console.log(data)
 
                 $('#test').replaceWith(data)
 
@@ -109,57 +105,15 @@
                 city: "Duckburg"
             },
             function (data) {
-                console.log(data)
+//                console.log(data)
 
-//                $('#jq').replaceWith(data)
                 $('#test').replaceWith(data)
-//                $(data).replaceAll($('#jq'))
+
 
             });
 
     });
 
 
-    //$(document).ready(function(){
-    //  $("#send_data").click(function(){
-    //    $.get("/send_data",
-    //    {
-    //      name:"Donald Duck",
-    //      city:"Duckburg"
-    //    },
-    //    function(data,status){
-    //      alert("数据：" + data + "\n状态：" + status);
-    //    });
-    //  });
-    //});
-
-
-    //    $(function () {
-    //        getData(); // 第一次加载数据
-    //        // 开启定时任务，时间间隔为3000 ms。
-    //        setInterval(function () {
-    //            getData();
-    //        }, 30000);
-    //    });
-    //
-    //
-    //    function getData() {
-    //        $.getJSON("/send_data", function (data) {
-    //            if (200 == data.code) {
-    //                $("#systolic").text(data.data.systolic);
-    //                $("#diastolic").text(data.data.diastolic);
-    //                $("#pulse").text(data.data.pulse);
-    //            }
-    //        });
-    //    };
-
-
-    //    $(function () {
-    //        console.log(1)
-    //        // 开启定时任务，时间间隔为3000 ms。
-    //        setInterval(function () {
-    //            console.log(2)
-    //        }, 30000);
-    //    });
 
 </script>
