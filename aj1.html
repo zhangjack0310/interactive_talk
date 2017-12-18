@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <script src="static/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/semantic/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="static/semantic/dist/semantic.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+
+
+<h1>new</h1>
+<div class="fields" id="vuetest">
+    <table class="ui celled padded table">
+        <thead>
+        <tr>
+            <td v-for="title in head">{{title}}</td>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="each_data in res">
+            <td v-for="title in head">{{each_data[title]}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="ui mini form">
+    <div class="fields">
+        <div v-for="title in head" class="field">
+            <p>{{ title }}</p>
+            <input type="text" v-model="new_info[title]"/>
+        </div>
+        <div @click="createPerson"  class="ui purple button">VSubmit</div>
+        <div class="p_submit ui purple button">Submit</div>
+    </div>
+
+    </div>
+</div>
+
+
+<!--提交-->
+
+
+<br>
+<button id='deal_data' class="ui submit button">处理数据</button>
+
+</body>
+</html>
+
+
+<script>
+
+    $(function () {
+
+
+        deal_data(); // 第一次加载数据
+        // 开启定时任务，时间间隔为3000 ms。
+        setInterval(function () {
+//            req_info();
+        }, 30000);
+    });
+
+
+    function deal_data() {
+        $.get("api/get_data",
+
+            function (res_data) {
+                var res = res_data.info_data;
+                var head = res_data.head;
+                var new_info = res_data.new_info;
+                console.log(res);
+                console.log(head);
+                console.log(res_data.new_info)
+                var vm = new Vue({
+                    el: '#vuetest',
+                    data: {
+                        head: head,
+                        res: res,
+                        new_info:new_info
+
+                    },
+                    methods: {
+                        createPerson: function () {
+
+                            axios.post('api/submit_data', JSON.stringify(new_info))
+                                .then(function (response) {
+                                    console.log(response);
+                                    this.head = response.head;
+                                    this.info_data = response.info_data;
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                            // 添加完newPerson对象后，重置newPerson对象
+                            var newinfo = {};
+                            for (var i = 0; i < head.length; i++) {
+                                newinfo[head[i]] = ''
+                            }
+                            this.new_info = newinfo;
+                            console.log(this.info_data)
+
+
+                        },
+                        deletePerson: function (index) {
+                            // 删一个数组元素
+                            this.people.splice(index, 1);
+                        }
+                    }
+                })
+            });
+    }
+
+
+    $("#deal_data").click(function () {
+        deal_data();
+    });
+
+
+    var tj = $(".p_submit");//提交数据
+    tj.click(function () {
+        var post_data = {};
+        console.log(new_info);
+        console.log(post_data);
+
+//
+//        $.ajax({
+//            type: "post",
+//            contentType: "application/json",
+//            url: "api/submit_data",
+//            data: JSON.stringify(post_data),
+//            beforeSend: function () {
+//
+//                $.each(post_data, function (key,value) {
+//                })
+//
+//            },
+//            onSuccess: function (data) {
+//                alert('success' + data)
+//                if (data == "Success") {
+//                    alert('again')
+//                }
+//            },
+//            success: function (data) {
+//                console.log(data)
+//                if (data.is_succ == true) {
+//                    alert('again1')
+//                }
+//                else {
+//                    alert(data.data)
+//                }
+//            },
+//            complete: function () {
+//                $("loading").hide();
+//            },
+//            error: function (data) {
+//                console.info("error: " + data.responseText);
+//                alert('failed')
+//            }
+//        });
+
+    });
+
+
+</script>

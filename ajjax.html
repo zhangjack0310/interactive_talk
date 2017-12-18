@@ -2,11 +2,10 @@
 <html>
 <head>
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>-->
-   <script
-        src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" type="text/css" href="static/semantic/dist/semantic.min.css">
     <script src="static/semantic/dist/semantic.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 </head>
 <body>
@@ -18,55 +17,55 @@
         {% for i in head%}
         <th class="fields">{{i}}</th>
         {%end for%}
+        <th class="fields">功能</th>
     </tr>
     </thead>
     <tbody id='test'>
 
 
     <!--内容-->
-    <div>
-        <tr id="jq">
-            <td>test</td>
-
-            <td>
-                <div class="ui input">
-                    <input type="text" placeholder={{i}}>
-                </div>
-
-            </td>
-
-        </tr>
-    </div>
-    <tr>
-        <td></td>
-        {% for i in head%}
-        <td>
-            <div class="ui input">
-                <input type="text" placeholder={{i}} value="">
-            </div>
-
-        </td>
-        {%end for%}
-    </tr>
     </tbody>
 </table>
 
+<h1>new</h1>
+<div id="vuetest">
+<table class="ui celled padded table">
+    <thead>
+    <tr>
+        <th class="single line">序号</th>
+        {% for i in head%}
+        <th class="fields">{{i}}</th>
+        {%end for%}
+        <th class="fields">功能</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="info in res">
+        <td>{{ info }}</td>
+        <td>{{ info }}</td>
+        <td>{{ info }}</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
 
 <!--提交-->
-<div id='info_submit' class="ui mini form" data-value="laobzhang">
-    <div class="fields" data-value="laobzhang">
+<div class="ui mini form">
+    <div class="fields">
         {% for i in head%}
-        <div class="field new_data" >
-            <label>{{i}}</label>
+        <div class="field">
             <input placeholder={{i}} type="text" name={{i}}>
         </div>
         {%end for%}
+        <div id='tijiao' class="ui purple button">Submit</div>
     </div>
-    <div id='tijiao' class="ui purple button" data-value="'laoli">Submit</div>
+
 </div>
 
 <br>
-<button id='send_data' class="ui submit button">刷新按钮</button>
+<button id='refresh_data' class="ui submit button">刷新按钮</button>
+<button id='deal_data' class="ui submit button">处理数据</button>
 
 </body>
 </html>
@@ -80,7 +79,7 @@
         req_info(); // 第一次加载数据
         // 开启定时任务，时间间隔为3000 ms。
         setInterval(function () {
-            req_info();
+//            req_info();
         }, 30000);
     });
 
@@ -100,7 +99,7 @@
             });
     };
 
-    $("#send_data").click(function () {
+    $("#refresh_data").click(function () {
         $.get("/send_data",
             {
                 name: "Donald Duck",
@@ -116,26 +115,77 @@
 
     });
 
+    $("#deal_data").click(function () {
+        $.get("http://localhost:8887/get_data",
 
-        var tj = $("#tijiao")
-    tj.click(function () {
-        var post_data = {};
-      {% for name in head%}
-        post_data.{{name}} = $('input[name={{name}}]').val();
-
-
-        {%end for%}
-        console.log(post_data);
-         $.post("/submit_data",
-            JSON.stringify(post_data),
             function (data) {
-                console.log(data)
+                var res = data.info_data;
+                var head = data.head;
+                console.log(res)
+                        var vm = new Vue({
+            el: '#vuetest',
+            data: {
+                head: head,
+                res: res,
+            }
+        })
 
 
 
             });
     });
 
+    var tj = $("#tijiao");//提交数据
+    tj.click(function () {
+        var post_data = {};
+        {% for name in head %}
+            post_data.{{name}} = $('input[name={{name}}]').val();
+
+
+        {% end for%}
+        console.log(post_data);
+//         $.post("/submit_data",
+//            JSON.stringify(post_data),
+//            function (data) {
+//                console.log(data)
+//            });
+
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "/submit_data",
+            data: JSON.stringify(post_data),
+            beforeSend: function () {
+
+                $.each(post_data, function (key,value) {
+                })
+
+            },
+            onSuccess: function (data) {
+                alert('success' + data)
+                if (data == "Success") {
+                    alert('again')
+                }
+            },
+            success: function (data) {
+                console.log(data)
+                if (data.is_succ == true) {
+                    alert('again1')
+                }
+                else {
+                    alert(data.data)
+                }
+            },
+            complete: function () {
+                $("loading").hide();
+            },
+            error: function (data) {
+                console.info("error: " + data.responseText);
+                alert('failed')
+            }
+        });
+
+    });
 
 
 </script>
