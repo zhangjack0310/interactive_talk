@@ -23,8 +23,10 @@ def get_data(user = 'laobzhang'):
     return db.info.find_one(dict(user=user))
 
 def push_new_data(info,user='laobzhang'):
-    return db.info.update(dict(user=user), {"$push":{"info":info}})
+    return db.info.update(dict(user=user), {"$push":{"info":info},"$inc":{"max_id":1}})
 
+def delete_data(index,user = 'laobzhang'):
+    return db.info.update(dict(user=user),{"$pull":{"info":{'web_id': index}}})
 
 if __name__ == '__main__':
     print 123

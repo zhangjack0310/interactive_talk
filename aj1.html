@@ -20,24 +20,30 @@
         <thead>
         <tr>
             <td v-for="title in head">{{title}}</td>
-
+            <td>删除</td>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="each_data in res">
+        <tr v-for="(each_data, index) in res">
             <td v-for="title in head">{{each_data[title]}}</td>
+            <td>
+                <button class="ui blue button" @click="deleteData(each_data['web_id'])">Delete</button>
+                <button class="ui yellow button" @click="editData(each_data['web_id'])">Edit</button>
+            </td>
         </tr>
         </tbody>
     </table>
     <div class="ui mini form">
-    <div class="fields">
-        <div v-for="title in head" class="field">
-            <p>{{ title }}</p>
-            <input type="text" v-model="new_info[title]"/>
+        <div class="fields">
+            <div v-for="title in head" class="field">
+                <div  v-if="title != 'web_id'">
+                <p>{{ title }}</p>
+                <input type="text" v-model="new_info[title]"/>
+                </div>
+            </div>
+            <div @click="createData" class="ui purple button">VSubmit</div>
+            <div id='p_submit' class="ui purple button">Submit</div>
         </div>
-        <div @click="createPerson"  class="ui purple button">VSubmit</div>
-        <div class="p_submit ui purple button">Submit</div>
-    </div>
 
     </div>
 </div>
@@ -47,7 +53,7 @@
 
 
 <br>
-<button id='deal_data' class="ui submit button">处理数据</button>
+<button id='deal_data' class="ui submit button">刷新数据</button>
 
 </body>
 </html>
@@ -58,110 +64,92 @@
     $(function () {
 
 
-        deal_data(); // 第一次加载数据
+        first_get_data(); // 第一次加载数据
         // 开启定时任务，时间间隔为3000 ms。
         setInterval(function () {
-//            req_info();
-        }, 30000);
+            refresh_data();
+        }, 300000);
     });
 
 
-    function deal_data() {
+    var vm = new Vue({
+        el: '#vuetest',
+        data: {
+            head: [],
+            res: [],
+            new_info: {},
+        },
+        methods: {
+            createData: function () {
+
+                axios.post('api/submit_data', JSON.stringify(vm.new_info))
+                    .then(function (response) {
+                        vm.head = response.data.head;
+                        vm.res = response.data.info_data;
+                        vm.new_info = response.data.new_info
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            deleteData: function (index) {
+                // 删一个数组元素
+                console.log(index);
+                axios.get('api/delete_data', {'params': {'index':index}})
+                    .then(function (response) {
+                        vm.head = response.data.head;
+                        vm.res = response.data.info_data;
+                        vm.new_info = response.data.new_info
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+
+            },
+
+
+
+            editData: function (index) {
+                // 删一个数组元素
+                console.log(index);
+
+
+            }
+        }
+    });
+
+
+    function first_get_data() {
         $.get("api/get_data",
 
             function (res_data) {
-                var res = res_data.info_data;
-                var head = res_data.head;
-                var new_info = res_data.new_info;
-                console.log(res);
-                console.log(head);
-                console.log(res_data.new_info)
-                var vm = new Vue({
-                    el: '#vuetest',
-                    data: {
-                        head: head,
-                        res: res,
-                        new_info:new_info
-
-                    },
-                    methods: {
-                        createPerson: function () {
-
-                            axios.post('api/submit_data', JSON.stringify(new_info))
-                                .then(function (response) {
-                                    console.log(response);
-                                    this.head = response.head;
-                                    this.info_data = response.info_data;
-                                })
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
-                            // 添加完newPerson对象后，重置newPerson对象
-                            var newinfo = {};
-                            for (var i = 0; i < head.length; i++) {
-                                newinfo[head[i]] = ''
-                            }
-                            this.new_info = newinfo;
-                            console.log(this.info_data)
-
-
-                        },
-                        deletePerson: function (index) {
-                            // 删一个数组元素
-                            this.people.splice(index, 1);
-                        }
-                    }
-                })
+                vm.res = res_data.info_data;
+                vm.head = res_data.head;
+                vm.new_info = res_data.new_info;
             });
     }
+    function refresh_data() {
+    $.get("api/get_data",
 
+        function (res_data) {
+            vm.res = res_data.info_data;
+            vm.head = res_data.head;
+        });
+    }
 
     $("#deal_data").click(function () {
-        deal_data();
+        refresh_data();
     });
 
 
-    var tj = $(".p_submit");//提交数据
+    var tj = $("#p_submit");//提交数据
     tj.click(function () {
         var post_data = {};
         console.log(new_info);
         console.log(post_data);
 
-//
-//        $.ajax({
-//            type: "post",
-//            contentType: "application/json",
-//            url: "api/submit_data",
-//            data: JSON.stringify(post_data),
-//            beforeSend: function () {
-//
-//                $.each(post_data, function (key,value) {
-//                })
-//
-//            },
-//            onSuccess: function (data) {
-//                alert('success' + data)
-//                if (data == "Success") {
-//                    alert('again')
-//                }
-//            },
-//            success: function (data) {
-//                console.log(data)
-//                if (data.is_succ == true) {
-//                    alert('again1')
-//                }
-//                else {
-//                    alert(data.data)
-//                }
-//            },
-//            complete: function () {
-//                $("loading").hide();
-//            },
-//            error: function (data) {
-//                console.info("error: " + data.responseText);
-//                alert('failed')
-//            }
-//        });
 
     });
 

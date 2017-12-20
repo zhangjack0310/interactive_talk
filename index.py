@@ -5,7 +5,8 @@ from tornado.web import RequestHandler
 import time
 import json
 from datetime import datetime
-from models import get_data, push_new_data
+from service import form_data
+from models import get_data, push_new_data,delete_data
 from tornado.options import define, options, parse_command_line
 settings = {'debug':True,
             "static_path": "static",}
@@ -45,12 +46,7 @@ class SendHandler(RequestHandler):
 
 class GetDataSendHandler(RequestHandler):
     def get(self):
-        data = get_data()
-        info_data = data.get('info')
-        head = data.get('key')
-        new_info = {i:'' for i in head}
-        new_info.update({"test":""})
-        result = dict(info_data=info_data, head=head, new_info=new_info)
+        result = form_data()
         self.set_header("Content-Type", "application/json")
         self.finish(json.dumps(result, ensure_ascii=False))
 
@@ -61,10 +57,8 @@ class SubmitHandler(RequestHandler):
         print insert_data
         if not insert_data.values() == ['']*len(insert_data):
             push_new_data(insert_data)
-            data = get_data()
-            info_data = data.get('info')
-            head = data.get('key')
-            result = dict(is_succ=True, data='success insert', info_data=info_data, head=head)
+            result = dict(is_succ=True, data='success insert')
+            result.update(form_data())
             self.set_header("Content-Type", "application/json")
             self.finish(json.dumps(result, ensure_ascii=False))
         else:
@@ -73,15 +67,27 @@ class SubmitHandler(RequestHandler):
             self.finish(json.dumps(result, ensure_ascii=False))
 
 
+class DataDeleteHandler(RequestHandler):
+    def get(self):
+        index = self.get_argument('index','')
+        print index
+        if index and index.isdigit():
+            print delete_data(int(index))
+            result = {"is_succ":True}
+        else:
+            result = {"is_succ": False}
+        result.update(form_data())
+
+        self.set_header("Content-Type", "application/json")
+        self.finish(json.dumps(result, ensure_ascii=False))
+
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/send_data", SendHandler),
-    (r"/submit_data", SubmitHandler),
-    (r"/get_data", GetDataSendHandler),
     (r"/api/send_data", SendHandler),
     (r"/api/submit_data", SubmitHandler),
     (r"/api/get_data", GetDataSendHandler),
+    (r"/api/delete_data", DataDeleteHandler),
     ], **settings)
 
 if __name__ == "__main__":
