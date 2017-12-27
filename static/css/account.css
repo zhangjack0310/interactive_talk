@@ -1,0 +1,708 @@
+.content .account-video-info {
+    color: #50a2ff;
+    margin: 0;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 10px;
+    border-top: 37px solid #50a2ff;
+    border-right: 43px solid transparent;
+}
+
+/* position 'new' label */
+.triangle > span {
+    color: white;
+    font-size: 11px;
+    position: absolute;
+    top: -33px;
+    left: 2px;
+    transform: rotate(-45deg);
+}
+
+.account-video-info ~ .account-video-info {
+    border-top: 1px solid #EEEEEE;
+}
+
+.video-time {
+    height: 100%;
+}
+
+.min-width-200 {
+    min-width: 200px;
+}
+
+.video-time span {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 25px;
+    left: -40px;
+    padding-left: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-right: 10px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.padding-0 {
+    padding: 0 !important;
+}
+
+.min-height {
+    min-height: 460px;
+}
+
+.content .add-account {
+    padding: 20px;
+}
+
+.content .add-account .items {
+    margin-left: 0;
+}
+
+.content .add-account .box {
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.content .add-account .box .inner-box {
+    display: block;
+    padding: 15px 0;
+    color: #abb4c3;
+
+}
+
+.content .add-account .box .inner-box {
+    background: #f8f8f8;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.content .add-account .box .inner-box:not(.disabled):hover {
+    background: #eff6fe;
+    color: #50a2ff;
+}
+
+.content .add-account .box .inner-box.disabled {
+    cursor: not-allowed;
+}
+
+.content .add-account .box img {
+    height: 28px;
+}
+
+.content .add-account .box p img {
+    padding: 0 5px;
+}
+
+.content .add-account .box i {
+    font-size: 10px;
+    line-height: 28px;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 2px;
+}
+
+.content .add-account .box p {
+    text-align: left;
+    display: inline-block;
+    line-height: 28px;
+    margin: 0;
+    font-size: 14px;
+    width: 60px;
+}
+
+#penguin {
+    width: auto;
+}
+
+.content .account-video-info .left {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 130px;
+}
+
+.ui.accordion.row {
+    max-width: none;
+}
+
+.content .account-video-info .left .info {
+    padding: 20px 20px 14px 150px;
+    width: 100%;
+    margin-left: -150px;
+}
+
+.content .account-video-info .left .head-photo {
+    padding: 10px 30px 10px 40px;
+}
+
+.content .account-video-info .left .head-photo,
+.content .account-video-info .left .info {
+    float: left;
+}
+
+.content .account-video-info .left .head-photo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.content .video-info .left .head-photo {
+    width: 82px;
+    height: 56px;
+    margin: 20px;
+    background-size: contain !important;
+    background-position: 50% !important;
+    background-color: #333 !important;
+}
+
+.content .account-video-info .left .info .fans-video {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.content .video-info .left .info .fans-video {
+    padding-top: 16px;
+}
+
+/*.content .account-video-info .left .info .fans-video span:first-child {
+    padding-right: 50px;
+}*/
+
+.content .account-video-info .left .info .fans-video span {
+    color: #abb4c3;
+    padding: 0;
+}
+
+.content .account-video-info .left .info .name img {
+    height: 20px;
+    padding-right: 3px;
+}
+
+.upload-info {
+    background: #fcfcfc !important;
+}
+
+.content .account-video-info .left .info .name p {
+    margin: 0;
+    font-size: 18px;
+    display: inline-block;
+    color: #333;
+    vertical-align: middle;
+    padding-right: 20px;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.content .account-video-info .right {
+    text-align: center;
+    padding-top: 32px;
+}
+
+.content .account-video-info .right .item {
+    width: 25%;
+    float: left;
+}
+
+.content .account-video-info .right .item .title {
+    color: #abb4c3;
+    text-align: center;
+}
+
+.content .account-video-info .right .item .info {
+    font-size: 24px;
+}
+
+.content .account-video-info .right .play {
+    width: 100%;
+}
+
+.content .account-video-info .right .play .title, .content .account-video-info .right .play .info {
+    text-align: center;
+}
+
+.content .account-video-info:hover .delete-icon {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.content .account-video-info .delete-icon i {
+    color: #ffffff;
+}
+
+.content .account-video-info:hover .delete-icon i {
+    font-size: 16px;
+    color: #8695AE;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    float: left;
+    background: rgba(196, 202, 212, 0.5);
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.table-head-photo {
+    width: 20px;
+    margin-right: 8px;
+}
+
+.upload-status {
+    padding: 3px 10px;
+    font-size: 12px;
+}
+
+.upload-checking {
+    color: white;
+    background: #ff6666;
+}
+
+.upload-successful {
+    color: white;
+    background: #33c272;
+}
+
+.upload-wait-removed {
+    color: white;
+    background: #cccccc;
+}
+
+.video-info-table {
+    padding: 13px 30px;
+    overflow: visible;
+}
+
+.video-info-table .upload-info {
+    border: none;
+}
+
+.video-info-table .upload-info tr th:last-child,
+.video-info-table .upload-info tr td:last-child {
+    text-align: right;
+    padding-right: 100px;
+    width: 100px;
+}
+
+.video-info-table .upload-info tr th {
+    border-left: none !important;
+}
+
+.video-info-table .upload-info tr td {
+    border: none !important;
+}
+
+.iconfont {
+    vertical-align: middle;
+}
+
+.left-27 {
+    padding-left: 27px !important;
+}
+
+.left-27 .icon-naozhong, .left-27 .time {
+    color: #959595;
+}
+
+.left-50 {
+    padding-left: 50px !important;
+
+}
+
+.content .video-info .bottom-border {
+    border-bottom: 1px solid rgba(34, 36, 38, .1);
+}
+
+.time-info {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.video-drop-down {
+    color: #959595 !important;
+}
+
+.content.field.active {
+    box-shadow: none;
+}
+
+.video-drop-close {
+    text-align: center;
+}
+
+.video-drop-close.hidden {
+    color: #ffffff !important;
+}
+
+.account-modal {
+    height: 320px;
+    overflow: initial;
+    margin-top: -125px;
+}
+
+.account-modal .content-title {
+    height: 60px;
+}
+
+@media only screen and (min-width: 1200px) {
+    .ui.small.modal {
+        width: 600px;
+        margin: 0 0 0 -300px;
+    }
+}
+
+.account-modal .content-title .header {
+    padding-left: 66px;
+    border: none;
+
+}
+
+.account-modal .content-title span {
+    font-weight: normal;
+    font-size: 18px;
+    display: inline-block;
+    margin-left: -5px;
+    position: relative;
+    top: -10px;
+}
+
+.account-modal .content-title img {
+    background: white;
+    position: relative;
+    left: -35px;
+    top: -25px;
+    border-radius: 50%;
+    width: 70px;
+}
+
+.account-modal .close {
+    font-style: inherit;
+    font-weight: 200;
+    font-size: 25px;
+    margin-right: 30px;
+    margin-top: 36px;
+    color: #959595;
+    padding: 0;
+}
+
+.account-modal .content {
+    box-shadow: none;
+    padding: 20px 80px !important;
+
+}
+
+.account-modal .content .modal-foot {
+    text-align: right;
+}
+
+.error-msg {
+    text-align: right;
+    margin-top: 60px;
+    color: #f96666;
+}
+
+.account-modal .content .save {
+    background-color: #50a2ff !important;
+    box-shadow: none !important;
+    color: white !important;
+    margin-right: 0;
+}
+
+.account-modal .content .ui.cancel.button {
+    background-color: #ffffff !important;
+    color: #abb4c3 !important;
+    box-shadow: 0 0 0 1px #abb4c3 inset !important;
+    font-weight: 400;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.account-modal .content .ui.cancel.button:hover {
+    color: #50a2ff !important;
+    box-shadow: 0 0 0 1px #50a2ff inset !important;
+}
+
+.account-modal .content .unsaved .v-label {
+    width: 50px !important;
+    position: relative !important;
+    color: #333 !important;
+    margin: 0 16px 0 0;
+    font-size: 16px;
+    line-height: 36px !important;
+    text-align: left;
+}
+
+.forget-password, .forget-password:focus {
+    color: #abb4c3;
+    float: right;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.orange-icon {
+    color: #ffb441;
+    position: relative;
+    bottom: 1px;
+}
+
+.forget-password:hover, .third-party:hover {
+    color: #50a2ff;
+}
+
+.third-party, .third-party:focus {
+    color: #abb4c3;
+    float: left;
+    padding-left: 66px;
+}
+
+.content .account-video-info .left .info .fans-video span:last-child {
+    padding-left: 15px;
+}
+
+.icon-box-radius {
+    padding-top: 5px;
+}
+
+.icon-box-radius span {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background: #F5F5F5;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #abb4c3 !important;
+}
+
+.iconfont.icon-tongji {
+    position: relative;
+    top: -4px;
+    left: 0;
+    font-size: 20px;
+}
+
+.icon-box-radius span:hover {
+    background: rgba(80, 162, 255, 0.1);
+    color: #50a2ff !important;
+}
+
+.icon-box-radius span:hover i {
+    color: #50a2ff !important;
+}
+
+.info .name .icon-delete {
+    display: none;
+}
+
+.info:hover .name .icon-delete {
+    display: inline;
+    color: #abb4c3;
+}
+
+.icon-delete:hover {
+    color: #50a2ff !important;
+}
+
+#ip-input .content-title {
+    padding-top: 3px;
+}
+
+#ip-input .content-title img {
+    background: white;
+    border: 1px solid #eee;
+    width: 80px;
+}
+
+#ip-input .content .unsaved .v-label {
+    width: 60px !important;
+}
+
+#ip-input {
+    height: 230px;
+}
+
+#ip-input .error-msg {
+    margin-top: 20px;
+}
+
+#captcha img {
+    width: 20%;
+}
+
+#captcha input {
+    width: 60%;
+    margin-right: 20%;
+}
+
+#captcha i.refresh {
+
+    position: relative;
+    top: 10px;
+    padding-left: 10px;
+    color: #50a2ff;
+}
+
+#sohu_captcha img {
+    width: 20%;
+}
+
+#sohu_captcha input {
+    width: 60%;
+    margin-right: 20%;
+}
+
+#sohu_captcha i.refresh {
+
+    position: relative;
+    top: 10px;
+    padding-left: 10px;
+    color: #50a2ff;
+}
+
+#bilibili_captcha img {
+    width: 30%;
+}
+
+#bilibili_captcha input {
+    width: 70%;
+}
+
+.refresh_img {
+    cursor: pointer;
+}
+
+.ui.button.save {
+    background-color: #50a2ff !important;
+    box-shadow: none !important;
+    color: white !important;
+    margin-right: 0;
+}
+
+.up-content.toutiao .modal-foot.actions {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.modal-foot.actions .ui.cancel.button {
+    background-color: #ffffff !important;
+    color: #abb4c3 !important;
+    box-shadow: 0 0 0 1px #abb4c3 inset !important;
+    font-weight: 400;
+    transition: all .2s;
+}
+
+.modal-foot.actions .ui.cancel.button:hover {
+    color: #50a2ff !important;
+    box-shadow: 0 0 0 1px #50a2ff inset !important;
+}
+
+.weibo-account-modal {
+    width: 520px !important;
+}
+
+.toutiao-account-modal {
+    width: 635px !important;
+}
+
+.weibo-account-modal .up-header {
+    margin: 0 30px !important;
+}
+
+.toutiao-account-modal .up-header {
+    margin: 0 45px !important;
+}
+
+.weibo-account-modal ul li {
+    line-height: 25px;
+    padding-bottom: 10px;
+}
+
+.toutiao-account-modal ul li {
+    line-height: 25px;
+    padding-bottom: 10px;
+}
+
+.weibo-account-modal ul li span {
+    color: #50a2ff;
+}
+
+.toutiao-account-modal ul li span {
+    color: #50a2ff;
+}
+
+.up-content.toutiao {
+    padding: 15px 30px;
+}
+
+.up-content.toutiao span {
+    color: #50a2ff;
+}
+
+.up-content.toutiao.success div {
+    float: left;
+}
+
+.toutiao-img {
+    padding-bottom: 20px;
+    padding-left: 50px;
+}
+
+#ip-input-migu .proto {
+    padding: 30px;
+    background-color: #f8f8f8;
+}
+
+#ip-input-migu .proto li {
+    list-style-type: decimal;
+    line-height: 25px;
+    color: #666;
+}
+
+#ip-input-migu .proto p {
+    line-height: 25px;
+    color: #666;
+}
+
+#ip-input-migu .content {
+    padding: 0 50px 20px 50px !important;
+}
+
+.unsaved.ui.migu.form {
+    font-weight: normal !important;
+    padding: 30px 30px 0 30px;
+}
+
+#ip-input-migu .error-msg {
+    text-align: left;
+    margin-top: 20px;
+    color: #f96666;
+}
+
+.myPassword {
+    position: absolute;
+}
+
+.showPassword {
+    position: absolute;
+    margin-left: 92%;
+    margin-top: 9px;
+    font-size: 18px !important;
+    color: #666;
+}

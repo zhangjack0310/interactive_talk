@@ -3,11 +3,13 @@
 <head>
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>-->
     <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
-    <script src="jquery.js"></script>
+    <script src="jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="semantic/dist/semantic.min.js"></script>
+    <script src="bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 </head>
@@ -16,6 +18,7 @@
 
 <h1>new</h1>
 <div class="fields" id="vuetest">
+
     <table class="ui celled padded table">
         <thead>
         <tr>
@@ -30,7 +33,11 @@
 
             <td>
                 <button class="ui blue button" @click="deleteData(each_data['web_id'])">Delete</button>
-                <button class="ui yellow button" @click="editData(each_data['web_id'])">Edit</button>
+                <button class="ui yellow button" @click="editDataShow(each_data)">Edit</button>
+
+
+                <!--data-target="#myModal  data-toggle="modal""-->
+
             </td>
         </tr>
         </tbody>
@@ -47,6 +54,38 @@
         </div>
 
     </div>
+
+    <!--编辑的文本框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" v-model="new_info">
+                        模态框（Modal）标题
+                    </h4>
+                </div>
+                <div v-for="title in head" class="field ui form">
+                    <!--<div>   v-if="title != 'web_id'"-->
+                    <div>
+                        <p>{{ title }}</p>
+                        <input type="text" v-model="edit_info[title]"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ui grey button" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="ui blue button" @click="editDataSubmit(edit_info)">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
 </div>
 
 
@@ -79,6 +118,7 @@
             head: [],
             res: [],
             new_info: {},
+            edit_info: {},
         },
         methods: {
             createData: function () {
@@ -112,11 +152,24 @@
 
 
 
-            editData: function (index) {
+            editDataShow: function (data) {
                 // 删一个数组元素
-                console.log(index);
-                alert('edit');
+                vm.edit_info = data;
+                edit_modal = $('#myModal');
+                $('#myModal h4').html('laobzhang');
+                edit_modal.modal('show');
 
+            },
+            editDataSubmit: function (data) {
+                // 删一个数组元素
+                console.log(data);
+                axios.post('http://localhost/api/edit_data', JSON.stringify(data))
+                    .then(function (response) {
+                        edit_modal.modal('hide');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
             }
         }

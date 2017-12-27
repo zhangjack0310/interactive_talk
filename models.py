@@ -28,6 +28,10 @@ def push_new_data(info,user='laobzhang'):
 def delete_data(index,user = 'laobzhang'):
     return db.info.update(dict(user=user),{"$pull":{"info":{'web_id': index}}})
 
+def edit_data(info,web_id,user = 'laobzhang'):
+    return db.info.update({"user":user,"info.web_id":web_id},{"$set":{"info.$":info}})
+# db.getCollection('info').update({"user":"laobzhang","info.web_id":1},{"$set":{"info.$.数量":4}})
+
 if __name__ == '__main__':
     print 123
 
