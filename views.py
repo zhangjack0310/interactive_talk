@@ -6,7 +6,7 @@ from models import push_new_data,delete_data, edit_data
 from utils import BaseHandler
 import session
 import tornado
-
+import time
 
 
 
@@ -61,7 +61,7 @@ class SubmitHandler(BaseHandler):
 
 class DataDeleteHandler(BaseHandler):
     def get(self):
-        index = self.get_argument('index','')
+        index = self.get_argument('index', '')
         print index
         if index and index.isdigit():
             print delete_data(int(index))
@@ -76,6 +76,7 @@ class DataDeleteHandler(BaseHandler):
 
 class DataEditHandler(BaseHandler):
     def post(self):
+        time.sleep(3)
         info = self.request.body
         edt_data = eval(info)
         print edt_data
