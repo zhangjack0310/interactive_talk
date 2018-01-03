@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="semantic/dist/semantic.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/aj1.css" rel="stylesheet">
+    <script src="clipboard.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+  <div class="ui sidebar inverted vertical menu">
+    <a class="item change-page" data-url="aj1.html">
+      1
+    </a>
+    <a class="item change-page" data-url="aj1.html">
+      2
+    </a>
+    <a class="item">
+      3
+    </a>
+  </div>
+  <div class="ui black big launch right attached fixed button mme">
+  <i class="content icon"></i>
+  <span class="text">菜单</span>
+</div>
+  <div class="pusher dimmed">
+      <div class="current-page">laobzhang</div>
+      </div>
+  </div>
+
+
+</body>
+
+
+</html>
+<script>
+$('.mme').on('click',function () {
+    $('.ui.sidebar')
+  .sidebar('toggle')
+;
+});
+
+//$(function () {
+//    load_aj1()
+//    });
+//function load_aj1() {
+//    $('.current-page').load('aj1.html');
+//        console.log('here')
+//}
+
+
+$('.change-page').on('click',function () {
+    console.log($('.change-page').data('url'))
+    $('.current-page').load($('.change-page').data('url'));
+})
+
+
+</script>

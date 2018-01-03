@@ -10,85 +10,85 @@
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="semantic/dist/semantic.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/aj1.css" rel="stylesheet">
 
 </head>
 <body>
 
+    <h1>new</h1>
+    <div class="fields ui container" id="vuetest">
 
-<h1>new</h1>
-<div class="fields" id="vuetest">
+        <table class="ui celled padded table">
+            <thead>
+            <tr>
+                <td v-for="title in head">{{title}}</td>
+                <td>删除</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(each_data, index) in res">
 
-    <table class="ui celled padded table">
-        <thead>
-        <tr>
-            <td v-for="title in head">{{title}}</td>
-            <td>删除</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(each_data, index) in res">
+                <td v-for="title in head">{{each_data[title]}}</td>
 
-            <td v-for="title in head">{{each_data[title]}}</td>
-
-            <td>
-                <button class="ui blue button" @click="deleteData(each_data['web_id'])">Delete</button>
-                <button class="ui yellow button" @click="editDataShow(each_data)">Edit</button>
-
+                <td>
+                    <button class="ui blue button" @click="deleteData(each_data['web_id'])">Delete</button>
+                    <button class="ui yellow button" @click="editDataShow(each_data)">Edit</button>
 
 
 
-                <!--data-target="#myModal  data-toggle="modal""-->
 
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="ui mini form">
-        <div class="fields">
-            <div v-for="title in head" class="field">
-                <div  v-if="title != 'web_id'">
-                <p>{{ title }}</p>
-                <input type="text" v-model="new_info[title]"/>
-                </div>
-            </div>
-            <div class="field">
-            <div @click="createData" class="ui purple button">Submit</div>
-            </div>
-        </div>
+                    <!--data-target="#myModal  data-toggle="modal""-->
 
-    </div>
-
-    <!--编辑的文本框-->
-    <!--style="height:150px;"-->
-    <div class="ui long modal editdata" >
-        <div>
-            <h2 class="ui huge dividing header">
-                模态框（Modal）标题
-            </h2>
-        </div>
-
-        <div class="ui form">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="ui mini form">
             <div class="fields">
                 <div v-for="title in head" class="field">
-                    <label class="large">{{title}}</label>
-                    <input type="text" v-model="edit_info[title]">
+                    <div  v-if="title != 'web_id'">
+                    <p>{{ title }}</p>
+                    <input type="text" v-model="new_info[title]"/>
+                    </div>
+                </div>
+                <div class="field">
+                <div @click="createData" class="ui purple button">Submit</div>
                 </div>
             </div>
+
         </div>
 
-        <div class="actions">
-            <div class="ui black deny button">关闭</div>
-            <div class="ui blue button" @click="editDataSubmit(edit_info)">提交更改</div>
+        <!--编辑的文本框-->
+        <!--style="height:150px;"-->
+        <div class="ui long modal editdata" >
+            <div>
+                <h2 class="ui huge dividing header">
+                    模态框（Modal）标题
+                </h2>
+            </div>
+
+            <div class="ui form">
+                <div class="fields">
+                    <div v-for="title in head" class="field">
+                        <label class="large">{{title}}</label>
+                        <input type="text" v-model="edit_info[title]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <div class="ui black deny button">关闭</div>
+                <div class="ui blue button" @click="editDataSubmit(edit_info)">提交更改</div>
+            </div>
         </div>
     </div>
-</div>
 
 
-<!--提交-->
+    <!--提交-->
 
 
-<br>
-<button id='deal_data' class="ui submit button">刷新数据</button>
+    <br>
+    <button id='deal_data' class="ui submit button">刷新数据</button>
 
 </body>
 </html>
@@ -194,7 +194,9 @@
         refresh_data();
     });
 
-
+    $('.mme').on('click', function () {
+        $('.ui.sidebar').sidebar('toggle');
+    });
 
 
 </script>
