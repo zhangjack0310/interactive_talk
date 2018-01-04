@@ -7,10 +7,10 @@ class BaseHandler(RequestHandler):
         print "get_current_user"
         cookie = self.get_secure_cookie('user')
         self._current_user = session.Session.account_by_cookie(cookie)
-        if not cookie:
+        if not self._current_user:
             return None
         else:
-            return cookie
+            return self._current_user
 
     def prepare(self):
         print self.current_user

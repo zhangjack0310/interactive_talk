@@ -32,6 +32,9 @@ def edit_data(info,web_id,user = 'laobzhang'):
     return db.info.update({"user":user,"info.web_id":web_id},{"$set":{"info.$":info}})
 # db.getCollection('info').update({"user":"laobzhang","info.web_id":1},{"$set":{"info.$.数量":4}})
 
+def get_user(user):
+    return db.user.find_one({"username":user})
+
 if __name__ == '__main__':
     print 123
 

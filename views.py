@@ -1,12 +1,13 @@
 #coding:utf-8
 from tornado.web import RequestHandler,HTTPError
 import json
-from service import form_data
+from service import form_data,is_validate_user
 from models import push_new_data,delete_data, edit_data
 from utils import BaseHandler
 import session
 import tornado
 import time
+
 
 
 
@@ -18,7 +19,7 @@ class MainHandler(BaseHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
     @tornado.web.authenticated
     def get(self):
-        self.redirect('http://localhost/static/aj1.html')
+        self.redirect('http://localhost/static/base.html')
 
 
 
@@ -26,15 +27,16 @@ class MainHandler(BaseHandler):
 
 class LoginHandler(BaseHandler):
     def get(self):
-        self.write('<html><body><form action="/login" method="post">'
-                   'Name: <input type="text" name="name">'
-                   '<input type="submit" value="Sign in">'
-                   '</form></body></html>')
+        self.render('static/login.html')
 
     def post(self):
-        cookie = self.get_argument('name')
-        session.Session.new(cookie)
-        self.redirect("/")
+        user = self.get_argument('user')
+        password = self.get_argument('password')
+        if is_validate_user(user, password):
+            self.set_secure_cookie('user', session.Session.new(user))
+            return self.redirect("/")
+        else:
+            return self.render('static/login.html', validate_user=False)
 
 class GetDataSendHandler(BaseHandler):
     def get(self):
