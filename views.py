@@ -19,7 +19,7 @@ class MainHandler(BaseHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
     @tornado.web.authenticated
     def get(self):
-        self.redirect('http://localhost/static/base.html')
+        self.redirect('http://198.13.53.253/static/base.html')
 
 
 

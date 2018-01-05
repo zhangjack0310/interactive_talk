@@ -119,7 +119,7 @@
         methods: {
             createData: function () {
 
-                axios.post('http://localhost/api/submit_data', JSON.stringify(vm.new_info))
+                axios.post('http://198.13.53.253/api/submit_data', JSON.stringify(vm.new_info))
                     .then(function (response) {
                         vm.head = response.data.head;
                         vm.res = response.data.info_data;
@@ -132,7 +132,7 @@
             deleteData: function (index) {
                 // 删一个数组元素
                 console.log(index);
-                axios.get('http://localhost/api/delete_data', {'params': {'index':index}})
+                axios.get('http://198.13.53.253/api/delete_data', {'params': {'index':index}})
                     .then(function (response) {
                         vm.head = response.data.head;
                         vm.res = response.data.info_data;
@@ -160,7 +160,7 @@
             editDataSubmit: function (data) {
                 // 删一个数组元素
                 console.log(data);
-                axios.post('http://localhost/api/edit_data', JSON.stringify(data))
+                axios.post('http://198.13.53.253/api/edit_data', JSON.stringify(data))
                     .then(function (response) {
                         $('.ui.modal.editdata').modal('hide');
                     })
@@ -174,7 +174,7 @@
 
 
     function first_get_data() {
-        $.get("http://localhost/api/get_data",
+        $.get("http://198.13.53.253/api/get_data",
 
             function (res_data) {
                 vm.res = res_data.info_data;
@@ -183,7 +183,7 @@
             });
     }
     function refresh_data() {
-    $.get("http://localhost/api/get_data",
+    $.get("http://198.13.53.253/api/get_data",
 
         function (res_data) {
             vm.res = res_data.info_data;
