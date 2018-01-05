@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <h1>new</h1>
+
     <div class="fields ui container" id="vuetest">
 
         <table class="ui celled padded table">
@@ -81,14 +81,15 @@
                 <div class="ui blue button" @click="editDataSubmit(edit_info)">提交更改</div>
             </div>
         </div>
+            <!--提交-->
+
+
+        <br>
+        <button id='deal_data' class="ui submit button">刷新数据</button>
+
     </div>
 
 
-    <!--提交-->
-
-
-    <br>
-    <button id='deal_data' class="ui submit button">刷新数据</button>
 
 </body>
 </html>
@@ -192,10 +193,6 @@
 
     $("#deal_data").click(function () {
         refresh_data();
-    });
-
-    $('.mme').on('click', function () {
-        $('.ui.sidebar').sidebar('toggle');
     });
 
 

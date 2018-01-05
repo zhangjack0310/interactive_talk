@@ -11,7 +11,7 @@ redis_client = redis.Redis(db=1)
 class Session(object):
 
     @classmethod
-    def new(cls, account, expire=60):
+    def new(cls, account, expire=60*60):
         if account:
             key = settings.SESSION_NAME.format(account)
             print key

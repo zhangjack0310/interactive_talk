@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <link rel="stylesheet" type="text/css" href="static/semantic/dist/semantic.min.css">
+    <script src="static/semantic/dist/semantic.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form action="/login" method="post">
-                   Name: <input type="text" name="user">
-    <br>
-                    Password:<input type="text" name="password">
-                   <input type="submit" value="Sign in">
-                   </form>
+<!--<form action="/login" method="post">-->
+                   <!--Name: <input type="text" name="user">-->
+    <!--<br>-->
+                    <!--Password:<input type="text" name="password">-->
+                   <!--<input type="submit" value="Sign in">-->
+                   <!--</form>-->
+
+<form class="ui form" action="/login" method="post">
+  <div class="field">
+    <label>username</label>
+    <input type="text" name="user" placeholder="username">
+  </div>
+  <div class="field">
+    <label>password</label>
+    <input type="text" name="password" placeholder="password">
+  </div>
+  <div class="field">
+    <div class="ui checkbox">
+      <input type="checkbox" tabindex="0" class="hidden">
+      <label>I agree to the Terms and Conditions</label>
+    </div>
+  </div>
+  <button class="ui button" type="submit">Submit</button>
+</form>
+
 </body>
 </html>
 
